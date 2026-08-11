@@ -1,0 +1,274 @@
+/*!
+ * Mineral theme for the giscus widget.
+ * Tokens copied verbatim from System_Config/html-template.html's frozen
+ * OKLCH block (source: AI-Mineral-system-0.3/active/DESIGN.md) — not
+ * re-derived. Structure mirrors preferred_color_scheme.css: light values as
+ * the default `main {}` block, dark overrides under
+ * @media (prefers-color-scheme: dark).
+ *
+ * Scope: full --color-* remap (Mineral has no separate success/attention/
+ * danger hues, so those three are derived by rotating --accent's own
+ * lightness/chroma to a different hue — not part of Mineral's token set,
+ * called out here rather than passed off as canonical). Prettylights syntax
+ * (markdown code-block highlighting) is left at GitHub's defaults —
+ * Mineral doesn't define a syntax palette and changing it risks readability
+ * for no brand benefit. Font family and border-radius are also remapped;
+ * radius overrides target Tailwind's compiled utility classes directly
+ * (giscus bakes border-radius into `.rounded-*`, not a CSS variable),
+ * explicitly excluding `.rounded-full` so avatars stay circular.
+ */
+
+main {
+  /* Mineral tokens (light) */
+  --bg: oklch(100% 0 0deg);
+  --surface: oklch(100% 0 0deg);
+  --ink: oklch(22.89% 0.0197 258.35deg);
+  --ink-2: oklch(34.1% 0.0197 258.35deg);
+  --muted: oklch(55.02% 0.0272 262.02deg);
+  --rule: oklch(85.83% 0.023 260.72deg);
+  --accent: oklch(56.67% 0.1712 259.62deg);
+  --accent-soft: oklch(96.84% 0.0108 256.69deg);
+  --accent-soft-ink: oklch(34.06% 0.1106 259.64deg);
+  --btn-ink: oklch(100% 0 0deg);
+  --radius: 0.1875rem;
+  --shadow: 0 1px 2px oklch(22.89% 0.0197 258.35deg / 8%);
+  --sans: "Open Sans", -apple-system, system-ui, blinkmacsystemfont, "Segoe UI", roboto, helvetica, arial, sans-serif;
+  --mono: "SF Mono", monaco, consolas, "Courier New", monospace;
+
+  /* Derived semantic hues — not in Mineral's token set (see header) */
+  --color-danger-fg: oklch(56.67% 0.1712 25deg);
+  --color-attention-fg: oklch(56.67% 0.1712 80deg);
+  --color-success-fg: oklch(56.67% 0.1712 145deg);
+
+  font-family: var(--sans);
+
+  /* Base.css font variables */
+  --font-family-sans: var(--sans);
+  --font-family-monospace: var(--mono);
+  --font-family-default: var(--sans);
+
+  /* Prettylights syntax — left at GitHub's light defaults */
+  --color-prettylights-syntax-comment: #6e7781;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-entity: #8250df;
+  --color-prettylights-syntax-storage-modifier-import: #24292f;
+  --color-prettylights-syntax-entity-tag: #116329;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-variable: #953800;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-string-regexp: #116329;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-italic: #24292f;
+  --color-prettylights-syntax-markup-bold: #24292f;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-inserted-text: #116329;
+  --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-ignored-text: #eaeef2;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-brackethighlighter-angle: #57606a;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+
+  /* Buttons */
+  --color-btn-text: var(--ink-2);
+  --color-btn-bg: var(--surface);
+  --color-btn-border: var(--rule);
+  --color-btn-shadow: var(--shadow);
+  --color-btn-inset-shadow: none;
+  --color-btn-hover-bg: color-mix(in oklch, var(--accent) 10%, var(--surface));
+  --color-btn-hover-border: var(--accent);
+  --color-btn-active-bg: var(--accent-soft);
+  --color-btn-active-border: var(--accent);
+  --color-btn-selected-bg: var(--accent-soft);
+  --color-btn-primary-text: var(--btn-ink);
+  --color-btn-primary-bg: var(--accent);
+  --color-btn-primary-border: var(--accent);
+  --color-btn-primary-shadow: var(--shadow);
+  --color-btn-primary-inset-shadow: none;
+  --color-btn-primary-hover-bg: color-mix(in oklch, black 8%, var(--accent));
+  --color-btn-primary-hover-border: color-mix(in oklch, black 8%, var(--accent));
+  --color-btn-primary-selected-bg: color-mix(in oklch, black 8%, var(--accent));
+  --color-btn-primary-selected-shadow: none;
+  --color-btn-primary-disabled-text: color-mix(in oklch, transparent 20%, var(--btn-ink));
+  --color-btn-primary-disabled-bg: color-mix(in oklch, var(--surface) 40%, var(--accent));
+  --color-btn-primary-disabled-border: var(--rule);
+  --color-action-list-item-default-hover-bg: color-mix(in oklch, var(--accent) 8%, transparent);
+  --color-segmented-control-bg: color-mix(in oklch, var(--ink) 5%, var(--bg));
+  --color-segmented-control-button-bg: var(--surface);
+  --color-segmented-control-button-selected-border: var(--muted);
+
+  /* Foreground / canvas / border */
+  --color-fg-default: var(--ink-2);
+  --color-fg-muted: var(--muted);
+  --color-fg-subtle: var(--muted);
+  --color-canvas-default: var(--bg);
+  --color-canvas-overlay: var(--surface);
+  --color-canvas-inset: color-mix(in oklch, var(--ink) 4%, var(--bg));
+  --color-canvas-subtle: color-mix(in oklch, var(--ink) 4%, var(--bg));
+  --color-border-default: var(--rule);
+  --color-border-muted: var(--rule);
+  --color-neutral-muted: color-mix(in oklch, var(--muted) 25%, transparent);
+
+  /* Accent */
+  --color-accent-fg: var(--accent);
+  --color-accent-emphasis: var(--accent);
+  --color-accent-muted: color-mix(in oklch, var(--accent) 40%, transparent);
+  --color-accent-subtle: var(--accent-soft);
+
+  /* Semantic (derived, see header) — --color-*-fg values already set above */
+  --color-attention-muted: color-mix(in oklch, var(--color-attention-fg) 40%, transparent);
+  --color-attention-subtle: color-mix(in oklch, var(--color-attention-fg) 12%, var(--bg));
+  --color-danger-muted: color-mix(in oklch, var(--color-danger-fg) 40%, transparent);
+  --color-danger-subtle: color-mix(in oklch, var(--color-danger-fg) 10%, var(--bg));
+  --color-primer-shadow-inset: none;
+
+  /*! Extensions from @primer/css/alerts/flash.scss */
+  --color-social-reaction-bg-hover: color-mix(in oklch, var(--ink) 8%, var(--bg));
+  --color-social-reaction-bg-reacted-hover: var(--accent-soft);
+}
+
+main .pagination-loader-container {
+  background-image: url("https://github.com/images/modules/pulls/progressive-disclosure-line.svg");
+}
+
+main .gsc-loading-image {
+  background-image: url("https://github.githubassets.com/images/mona-loading-default.gif");
+}
+
+/* Border radius — Tailwind bakes this into utility classes, not a CSS
+   variable, so overriding requires matching those class selectors directly.
+   .rounded-full is deliberately excluded so avatars stay circular. */
+main .rounded,
+main .rounded-md,
+main .rounded-t,
+main .rounded-t-md,
+main .rounded-b,
+main .rounded-b-md,
+main .rounded-none {
+  border-radius: var(--radius);
+}
+
+@media (prefers-color-scheme: dark) {
+  main {
+    /* Mineral tokens (dark) */
+    --bg: oklch(22.89% 0.0197 258.35deg);
+    --surface: oklch(28.89% 0.0197 258.35deg);
+    --ink: oklch(97.47% 0.0119 259.82deg);
+    --ink-2: oklch(90.28% 0.015 259deg);
+    --muted: oklch(78.26% 0.0271 259.05deg);
+    --rule: oklch(100% 0 0deg / 15%);
+    --accent: oklch(75.73% 0.1164 259.79deg);
+    --accent-soft: oklch(45.51% 0.018 260.7deg);
+    --accent-soft-ink: oklch(90.28% 0.0426 260.43deg);
+    --btn-ink: oklch(19.39% 0.0697 257.3deg);
+    --shadow: none;
+    --color-danger-fg: oklch(75.73% 0.1164 25deg);
+    --color-attention-fg: oklch(75.73% 0.1164 80deg);
+    --color-success-fg: oklch(75.73% 0.1164 145deg);
+
+    /* Prettylights syntax — left at GitHub's dark defaults */
+    --color-prettylights-syntax-comment: #8b949e;
+    --color-prettylights-syntax-constant: #79c0ff;
+    --color-prettylights-syntax-entity: #d2a8ff;
+    --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+    --color-prettylights-syntax-entity-tag: #7ee787;
+    --color-prettylights-syntax-keyword: #ff7b72;
+    --color-prettylights-syntax-string: #a5d6ff;
+    --color-prettylights-syntax-variable: #ffa657;
+    --color-prettylights-syntax-brackethighlighter-unmatched: #f47067;
+    --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+    --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+    --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+    --color-prettylights-syntax-carriage-return-bg: #b62324;
+    --color-prettylights-syntax-string-regexp: #7ee787;
+    --color-prettylights-syntax-markup-list: #f2cc60;
+    --color-prettylights-syntax-markup-heading: #1f6feb;
+    --color-prettylights-syntax-markup-italic: #c9d1d9;
+    --color-prettylights-syntax-markup-bold: #c9d1d9;
+    --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+    --color-prettylights-syntax-markup-deleted-bg: #67060c;
+    --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+    --color-prettylights-syntax-markup-inserted-bg: #033a16;
+    --color-prettylights-syntax-markup-changed-text: #ffdfb8;
+    --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+    --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
+    --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+    --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+    --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
+    --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
+    --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+
+    /* Buttons */
+    --color-btn-text: var(--ink-2);
+    --color-btn-bg: var(--surface);
+    --color-btn-border: var(--rule);
+    --color-btn-shadow: var(--shadow);
+    --color-btn-inset-shadow: none;
+    --color-btn-hover-bg: color-mix(in oklch, var(--accent) 14%, var(--surface));
+    --color-btn-hover-border: var(--accent);
+    --color-btn-active-bg: var(--accent-soft);
+    --color-btn-active-border: var(--accent);
+    --color-btn-selected-bg: var(--accent-soft);
+    --color-btn-primary-text: var(--btn-ink);
+    --color-btn-primary-bg: var(--accent);
+    --color-btn-primary-border: var(--accent);
+    --color-btn-primary-shadow: var(--shadow);
+    --color-btn-primary-inset-shadow: none;
+    --color-btn-primary-hover-bg: color-mix(in oklch, white 10%, var(--accent));
+    --color-btn-primary-hover-border: color-mix(in oklch, white 10%, var(--accent));
+    --color-btn-primary-selected-bg: color-mix(in oklch, white 10%, var(--accent));
+    --color-btn-primary-selected-shadow: none;
+    --color-btn-primary-disabled-text: color-mix(in oklch, transparent 20%, var(--btn-ink));
+    --color-btn-primary-disabled-bg: color-mix(in oklch, var(--surface) 40%, var(--accent));
+    --color-btn-primary-disabled-border: var(--rule);
+    --color-action-list-item-default-hover-bg: color-mix(in oklch, var(--accent) 12%, transparent);
+    --color-segmented-control-bg: color-mix(in oklch, var(--ink) 8%, var(--bg));
+    --color-segmented-control-button-bg: var(--surface);
+    --color-segmented-control-button-selected-border: var(--muted);
+
+    /* Foreground / canvas / border */
+    --color-fg-default: var(--ink-2);
+    --color-fg-muted: var(--muted);
+    --color-fg-subtle: var(--muted);
+    --color-canvas-default: var(--bg);
+    --color-canvas-overlay: var(--surface);
+    --color-canvas-inset: color-mix(in oklch, white 4%, var(--bg));
+    --color-canvas-subtle: color-mix(in oklch, white 4%, var(--bg));
+    --color-border-default: var(--rule);
+    --color-border-muted: var(--rule);
+    --color-neutral-muted: color-mix(in oklch, var(--muted) 25%, transparent);
+
+    /* Accent */
+    --color-accent-fg: var(--accent);
+    --color-accent-emphasis: var(--accent);
+    --color-accent-muted: color-mix(in oklch, var(--accent) 40%, transparent);
+    --color-accent-subtle: var(--accent-soft);
+
+    /* Semantic (derived, see header) — --color-*-fg values already set above */
+    --color-attention-muted: color-mix(in oklch, var(--color-attention-fg) 40%, transparent);
+    --color-attention-subtle: color-mix(in oklch, var(--color-attention-fg) 15%, var(--bg));
+    --color-danger-muted: color-mix(in oklch, var(--color-danger-fg) 40%, transparent);
+    --color-danger-subtle: color-mix(in oklch, var(--color-danger-fg) 15%, var(--bg));
+    --color-primer-shadow-inset: none;
+    --color-social-reaction-bg-hover: color-mix(in oklch, white 8%, var(--bg));
+    --color-social-reaction-bg-reacted-hover: var(--accent-soft);
+  }
+
+  main .pagination-loader-container {
+    background-image: url("https://github.com/images/modules/pulls/progressive-disclosure-line-dark.svg");
+  }
+
+  main .gsc-loading-image {
+    background-image: url("https://github.githubassets.com/images/mona-loading-dark.gif");
+  }
+}
