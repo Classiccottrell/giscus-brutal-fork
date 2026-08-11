@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "pages/**/*.ts": {
+      "memory": 192
+    }
+  }
+}
