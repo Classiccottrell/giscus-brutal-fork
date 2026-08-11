@@ -6,7 +6,7 @@ import { assertOrigin } from '../lib/config';
 import { AuthContext, ConfigContext, getLoginUrl, ThemeContext } from '../lib/context';
 import { emitData } from '../lib/messages';
 import { decodeState } from '../lib/oauth/state';
-import { IErrorMessage, ISignOutMessage } from '../lib/types/giscus';
+import { IErrorMessage, IResizeHeightMessage, ISignOutMessage } from '../lib/types/giscus';
 import { cleanAnchor, cleanSessionParam, getOriginHost } from '../lib/utils';
 import { env, Theme } from '../lib/variables';
 import { getAppAccessToken } from '../services/github/getAppAccessToken';
@@ -112,6 +112,23 @@ export default function PinWidgetPage({
   }, [resolvedOrigin]);
 
   useEffect(() => setTheme(theme), [setTheme, theme]);
+
+  // Mirrors Widget.tsx's own resize signal — the parent can't measure a
+  // cross-origin iframe's content directly, so it needs this to size the
+  // popover responsively instead of a fixed guess.
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      emitData<IResizeHeightMessage>(
+        { resizeHeight: Math.ceil(entry.contentRect.height) },
+        resolvedOrigin,
+      );
+    });
+
+    observer.observe(document.querySelector('body'));
+    return () => observer.disconnect();
+  }, [resolvedOrigin]);
 
   useEffect(() => {
     if (session && !token) {
